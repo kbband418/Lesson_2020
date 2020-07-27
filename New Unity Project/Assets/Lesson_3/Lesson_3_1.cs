@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using UnityEditor;
 
-public class Lesson_2_B : MonoBehaviour
+public class Lesson_3_1 : MonoBehaviour
 {
     public void Awake()
     {
@@ -13,11 +13,14 @@ public class Lesson_2_B : MonoBehaviour
 
     public Vector3 m_MoveVector = Vector2.zero;
 
+    public Vector3 m_MouseVector = Vector3.zero;
+    public Vector3 m_TranMouseVector = Vector3.zero;
+
     public Vector3 m_NewPoint_1 = Vector3.zero;
     public Vector3 m_NewPoint_2 = Vector3.zero;
 
     public Matrix4x4 m_RotationMatrix = new Matrix4x4();
-    
+
 
     public int m_MaxDegree = 0;
     public int m_Degree = 0;
@@ -55,6 +58,22 @@ public class Lesson_2_B : MonoBehaviour
         m_NewPoint_2 = m_RotationMatrix.MultiplyPoint(m_Point_2);
         Handles.color = Color.green;
         Handles.DrawLine(m_NewPoint_1, m_NewPoint_2);
+        
+        m_MouseVector = Input.mousePosition;
+        m_TranMouseVector = m_MouseVector;
+        m_TranMouseVector.y = 720f - m_MouseVector.y;
+
+        if (Input.GetMouseButton(0))
+        {
+            m_RotationMatrix.m03 = m_TranMouseVector.x;
+            m_RotationMatrix.m13 = m_TranMouseVector.y;
+        }
+        else
+        {
+            m_RotationMatrix.m03 = m_MoveVector.x;
+            m_RotationMatrix.m13 = m_MoveVector.y;
+        }
+
 
         Handles.color = Color.red;
         Handles.matrix = m_RotationMatrix;
