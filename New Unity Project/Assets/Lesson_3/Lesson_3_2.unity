@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Point_1: {x: 0, y: 0, z: 0}
-  m_Point_2: {x: 200, y: 0, z: 0}
+  m_Point_2: {x: 200, y: 200, z: 0}
   m_MouseVector: {x: 0, y: 0, z: 0}
   m_TranMouseVector: {x: 0, y: 0, z: 0}
   m_RotationMatrix:
@@ -176,6 +176,7 @@ MonoBehaviour:
   m_OriginalDegree: 0
   m_TargetDegree: 0
   m_AddDegree: 0
+  mDifferenceDegree: 0
 --- !u!81 &108550235
 AudioListener:
   m_ObjectHideFlags: 0
