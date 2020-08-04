@@ -65,12 +65,18 @@ public class Lesson_3_2 : MonoBehaviour
 
             if(m_IsLeft)
             {//直角坐標系 逆時針
-                mDifferenceDegree = (-1) * (((m_TargetDegree < 0)? m_TargetDegree + 360 : m_TargetDegree) - m_OriginalDegree);
+                if (m_TargetDegree < 0 && m_OriginalDegree < 0)
+                    mDifferenceDegree = (-1) * (m_TargetDegree - m_OriginalDegree);
+                else
+                    mDifferenceDegree = (-1) * (((m_TargetDegree < 0) ? m_TargetDegree + 360 : m_TargetDegree) - m_OriginalDegree);
                 m_AddDegree = -1;
             }
             else
             {//直角坐標系 順時針
-                mDifferenceDegree = (((m_OriginalDegree < 0) ? m_OriginalDegree + 360 : m_OriginalDegree) - m_TargetDegree);
+                if (m_TargetDegree < 0 && m_OriginalDegree < 0)
+                    mDifferenceDegree = (m_OriginalDegree - m_TargetDegree);
+                else
+                    mDifferenceDegree = (((m_OriginalDegree < 0) ? m_OriginalDegree + 360 : m_OriginalDegree) - m_TargetDegree);
                 m_AddDegree = 1;
             }
         }
