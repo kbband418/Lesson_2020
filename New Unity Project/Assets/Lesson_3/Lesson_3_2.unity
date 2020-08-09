@@ -152,10 +152,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ec46cc804d6ec14eb07cf1a78f49d0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Point_1: {x: 0, y: 0, z: 0}
-  m_Point_2: {x: 200, y: 200, z: 0}
+  m_BasePoint_1: {x: 0, y: 0, z: 0}
+  m_BasePoint_2: {x: 0, y: 200, z: 0}
   m_MouseVector: {x: 0, y: 0, z: 0}
-  m_TranMouseVector: {x: 0, y: 0, z: 0}
+  m_TranMousePoint: {x: 0, y: 0, z: 0}
   m_RotationMatrix:
     e00: 0
     e01: 0
@@ -173,10 +173,13 @@ MonoBehaviour:
     e31: 0
     e32: 0
     e33: 0
+  m_IsLeft: 0
+  m_OriginalRadian: 0
   m_OriginalDegree: 0
-  m_TargetDegree: 0
-  m_AddDegree: 0
+  m_TempTargetRadian: 0
+  m_TempTargetDegree: 0
   mDifferenceDegree: 0
+  m_AddDegree: 0
 --- !u!81 &108550235
 AudioListener:
   m_ObjectHideFlags: 0
