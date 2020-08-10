@@ -8,7 +8,6 @@ public class Lesson_3_2 : MonoBehaviour
         Application.targetFrameRate = 30;
     }
 
-    //目前只有m_Point_1 = = new Vector3(0, 0, 0)成立
     public Vector3 m_BasePoint_1 = new Vector3(0, 0, 0);
     public Vector3 m_BasePoint_2 = new Vector3(200, 0, 0);
 
@@ -24,8 +23,8 @@ public class Lesson_3_2 : MonoBehaviour
 
     public bool m_IsLeft = false;
 
-    private bool m_IsPlaying = false;
-    private int m_Degree = 0;
+    public bool m_IsPlaying = false;
+    public int m_Degree = 0;
 
     public float m_OriginalRadian = 0;
     public int m_OriginalDegree = 0;
@@ -39,7 +38,7 @@ public class Lesson_3_2 : MonoBehaviour
 
     private void OnGUI()
     {
-        m_OriginalRadian = Mathf.Atan2(m_BasePoint_2.y, m_BasePoint_2.x);
+        m_OriginalRadian = Mathf.Atan2(m_BasePoint_2.y - m_BasePoint_1.y, m_BasePoint_2.x - m_BasePoint_1.x);
         m_OriginalDegree = (int)(m_OriginalRadian * 180 / Mathf.PI);
         m_ScreenBaseVector.x = Screen.width / 2;
         m_ScreenBaseVector.y = Screen.height / 2;
@@ -49,7 +48,7 @@ public class Lesson_3_2 : MonoBehaviour
         Handles.color = Color.blue;
 
         //基準點轉直角坐標系
-        Vector3 m_TempBasePoint_1 = m_BasePoint_1;
+        Vector3 m_TempBasePoint_1 = new Vector3(m_BasePoint_1.x, (-1) * m_BasePoint_1.y, m_BasePoint_1.z);
         Vector3 m_TempBasePoint_2 = new Vector3(m_BasePoint_2.x, (-1) * m_BasePoint_2.y, m_BasePoint_2.z);
         Handles.DrawLine(m_TempBasePoint_1 + m_ScreenBaseVector, m_TempBasePoint_2 + m_ScreenBaseVector);
 
@@ -61,8 +60,8 @@ public class Lesson_3_2 : MonoBehaviour
             m_MouseVector = Input.mousePosition;
             //取得滑鼠點擊位置直角坐標系
             m_TranMousePoint = m_MouseVector;
-            m_TranMousePoint.x = m_MouseVector.x - m_ScreenBaseVector.x;
-            m_TranMousePoint.y = m_MouseVector.y - m_ScreenBaseVector.y;
+            m_TranMousePoint.x = m_MouseVector.x - m_ScreenBaseVector.x - m_BasePoint_1.x;
+            m_TranMousePoint.y = m_MouseVector.y - m_ScreenBaseVector.y - m_BasePoint_1.y;
 
             m_TargetRadian = Mathf.Atan2(m_TranMousePoint.y, m_TranMousePoint.x);
             m_TargetDegree = (int)(m_TargetRadian * 180 / Mathf.PI);
@@ -99,17 +98,19 @@ public class Lesson_3_2 : MonoBehaviour
             Handles.matrix = Matrix4x4.identity;
             m_Degree += m_AddDegree;
 
-
             m_RotationMatrix = Matrix4x4.identity;
 
             m_RotationMatrix.m00 = Cos(m_Degree);
             m_RotationMatrix.m01 = (-1) * Sin(m_Degree);
-            m_RotationMatrix.m03 = m_ScreenBaseVector.x;
+            m_RotationMatrix.m03 = m_ScreenBaseVector.x + m_BasePoint_1.x;//將點1當為原點，旋轉完後再位移到點1的位置
 
             m_RotationMatrix.m10 = Sin(m_Degree);
             m_RotationMatrix.m11 = Cos(m_Degree);
-            m_RotationMatrix.m13 = m_ScreenBaseVector.y;
+            m_RotationMatrix.m13 = m_ScreenBaseVector.y - m_BasePoint_1.y;//將點1當為原點，旋轉完後再位移到點1的位置
 
+            //將點1當成原點
+            m_TempBasePoint_1 = Vector3.zero;
+            m_TempBasePoint_2 = new Vector3(m_BasePoint_2.x - m_BasePoint_1.x, (-1) * (m_BasePoint_2.y - m_BasePoint_1.y), m_BasePoint_2.z - m_BasePoint_1.z);
             m_NewPoint_1 = m_RotationMatrix.MultiplyPoint(m_TempBasePoint_1);
             m_NewPoint_2 = m_RotationMatrix.MultiplyPoint(m_TempBasePoint_2);
             Handles.color = Color.green;
