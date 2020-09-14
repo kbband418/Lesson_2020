@@ -38,6 +38,12 @@ public class Lesson_5 : MonoBehaviour
     //紀錄新的基準點1 2的座標
     private Vector3 NewBasePoint_1 = Vector3.zero;
     private Vector3 NewBasePoint_2 = Vector3.zero;
+    //基準點1、2轉成原點的暫存
+    private Vector3 TempBasePoint_1 = Vector3.zero;
+    private Vector3 TempBasePoint_2 = Vector3.zero;
+    //將基準點1、2旋轉以及位移後的新點1、2
+    private Vector3 NewPoint_1 = Vector3.zero;
+    private Vector3 NewPoint_2 = Vector3.zero;
 
     void OnGUI()
     {
@@ -70,14 +76,6 @@ public class Lesson_5 : MonoBehaviour
 
         //扇形左右邊各張開的角度
         int iSideDegree = (TempDegree / 2);
-
-        //基準點1、2轉成原點的暫存
-        Vector3 TempBasePoint_1 = Vector3.zero;
-        Vector3 TempBasePoint_2 = Vector3.zero;
-
-        //將基準點1、2旋轉以及位移後的新點1、2
-        Vector3 NewPoint_1 = Vector3.zero;
-        Vector3 NewPoint_2 = Vector3.zero;
 
         //基準點的座標位在線集合的哪個Index
         int BasePointIndex = LineCount / 2;
