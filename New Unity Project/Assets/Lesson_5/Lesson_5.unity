@@ -153,11 +153,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BasePoint_1: {x: 0, y: 0, z: 0}
-  m_MouseVector: {x: 0, y: 0, z: 0}
-  m_TranMousePoint: {x: 0, y: 0, z: 0}
-  m_fLineLength: 100
+  m_fLineLength: 200
   m_iCircleAngle: 90
-  m_iRotateSpeed: 0
+  m_iLineDensity: 5
+  m_iRotateSpeed: 5
+  m_bIsInSector: 0
 --- !u!81 &108550235
 AudioListener:
   m_ObjectHideFlags: 0
